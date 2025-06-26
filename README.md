@@ -1,43 +1,43 @@
-```markdown
 # Aigeon AI: Find Place to Live
 
-Aigeon AI's `find-place-to-live` is a Python-based server application designed to help users search for and retrieve information about cities, neighborhoods, towns, or zip codes. This application leverages the RapidAPI service to provide detailed data about various locations, making it a valuable tool for individuals or businesses looking to gather insights on potential places to live.
+## Project Description
+
+Aigeon AI's "Find Place to Live" is a Python-based server application designed to assist users in discovering and retrieving information about various locations, such as cities, neighborhoods, towns, and zip codes. This application leverages external APIs to provide comprehensive data about potential living areas, making it an invaluable tool for individuals seeking to relocate or explore new environments.
 
 ## Features Overview
 
-- **Location Search**: The application allows users to search for towns or neighborhoods using a query string. This feature helps users obtain a `urlFragment`, which is essential for further data retrieval.
-- **Place Information Retrieval**: Users can obtain detailed data about specific places, including cities, neighborhoods, towns, or zip codes, by utilizing the `urlFragment` obtained from the location search.
+- **Location Search**: The application allows users to search for towns or neighborhoods and retrieve detailed information about these locations.
+- **Place Information Retrieval**: Users can obtain specific data about a city or neighborhood by using a unique identifier obtained from the location search.
+- **API Integration**: The application integrates with external APIs to fetch up-to-date and accurate information about different places.
 
 ## Main Features and Functionality
 
-The application is built using the FastMCP framework, which facilitates the creation of microservices. It provides two main tools:
+1. **Location Search Functionality**: 
+   - The application provides a tool to search for a town or neighborhood using a query string. This feature returns relevant data, including a unique `urlFragment` that can be used for further data retrieval.
 
-1. **Location Search Tool**: This tool enables users to search for a location by name. It returns a dictionary containing relevant information about the location, including the `urlFragment` needed for further queries.
+2. **Place Information Retrieval**:
+   - Users can retrieve detailed information about a specific place by providing the `urlFragment` obtained from the location search and specifying the type of place (e.g., City, Neighborhood, Town, Zipcode).
 
-2. **Places to Live Tool**: This tool retrieves detailed information about a specified place. Users can specify the type of place they are interested in (e.g., City, Neighborhood, Town, Zipcode) and obtain comprehensive data about it.
+3. **External API Communication**:
+   - The application communicates with an external API to ensure that the data provided is current and reliable. This integration is seamless and transparent to the user, offering a smooth user experience.
 
-## API Endpoints or Main Functions Description
+## Main Functions Description
 
-The application exposes two primary functions, each serving a distinct purpose:
+### `places_to_live`
 
-### `location(query: str) -> dict`
-
-- **Description**: Searches for a town or neighborhood based on the provided query string. This function is essential for obtaining the `urlFragment`, which is required for detailed place information retrieval.
+- **Purpose**: This function retrieves data about a specific city or neighborhood.
 - **Parameters**:
-  - `query`: A string representing the name or partial name of the location to search for.
-- **Returns**: A dictionary containing search results, including the `urlFragment`.
+  - `place`: A string annotated with a description indicating it should be the `urlFragment` obtained from the location search results.
+  - `type`: A string indicating the type of place, which can be "City", "Neighborhood", "Town", or "Zipcode".
+- **Returns**: A dictionary containing the data about the specified place. If the request fails, it returns an empty dictionary.
+- **Description**: This function constructs a request to the external API with the provided parameters and returns the response in a structured format.
 
-### `places_to_live(place: str, type: str) -> dict`
+### `location`
 
-- **Description**: Retrieves detailed data about a specified place. The function uses the `urlFragment` obtained from the `location` function to fetch information.
+- **Purpose**: This function searches for a town or neighborhood based on a query string.
 - **Parameters**:
-  - `place`: A string representing the `urlFragment` of the location.
-  - `type`: A string specifying the type of place (valid values: City, Neighborhood, Town, Zipcode).
-- **Returns**: A dictionary containing detailed information about the specified place.
+  - `query`: A string representing the search term for the desired location.
+- **Returns**: A dictionary containing search results, including the `urlFragment` for each location. If the request fails, it returns an empty dictionary.
+- **Description**: This function sends a request to the external API with the search query and processes the response to extract relevant location data.
 
-Both functions interact with the RapidAPI service to fetch data, utilizing HTTP GET requests with appropriate headers and parameters. The application handles responses by checking the status code and returning the JSON data if the request is successful.
-
-This server application is designed to run using the FastMCP framework's standard input/output transport mechanism, making it suitable for integration into larger systems or for standalone use.
-
-For more information on the API service used, visit the [RapidAPI Find Places to Live](https://rapidapi.com/apimaker/api/find-places-to-live) page.
-```
+The application is designed to run as a server, using the `FastMCP` framework to manage communication and processing. This setup ensures efficient handling of requests and responses, providing users with a reliable tool for finding places to live.
